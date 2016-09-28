@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.gzhd.domain">
+	<class name="OpenMessage" table="tb_open_message">
+
+		<id name="id" column="id" type="string" length="32"><!-- id 表示主键 -->
+			<generator class="uuid"></generator>  <!-- 主键的生成方式 -->
+		</id>
+
+		<property name="type" type="string">
+			<column name="type" length="30">
+				<comment>开奖类型</comment>
+			</column>
+		</property>
+
+         <property name="expect" type="string">
+			<column name="expect" length="30">
+				<comment>开奖期数</comment>
+			</column>
+		</property>
+		<property name="opencode" type="string">
+			<column name="opencode" length="50">
+				<comment>开奖号码</comment>
+			</column>
+		</property>
+
+		<property name="opentime" type="string">
+			<column name="opentime" length="30">
+				<comment>开奖时间</comment>
+			</column>
+		</property>
+
+
+	</class>
+
+
+</hibernate-mapping>

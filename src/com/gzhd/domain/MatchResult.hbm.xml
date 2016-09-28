@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.gzhd.domain">
+	<class name="MatchResult" table="tb_matchResult">
+
+		<id name="id" column="id" type="string" length="32"><!-- id 表示主键 -->
+			<generator class="uuid"></generator>  <!-- 主键的生成方式 -->
+		</id>
+
+		<property name="matchId" type="string">
+			<column name="matchId" length="20">
+				<comment>赛事id</comment>
+			</column>
+		</property>
+
+		<property name="result" type="string">
+			<column name="result" length="20">
+				<comment>赛事结果</comment>
+			</column>
+		</property>
+
+		<property name="type" type="string">
+			<column name="type" length="20">
+				<comment>类型（足球|篮球）</comment>
+			</column>
+		</property>
+
+		<property name="matchTime" type="string">
+			<column name="matchTime" length="20">
+				<comment>比赛时间</comment>
+			</column>
+		</property>
+		
+		<property name="winOrLose" type="string">
+			<column name="winOrLose" length="20">
+				<comment>输赢结果</comment>
+			</column>
+		</property>
+
+		
+	</class>
+
+
+</hibernate-mapping>

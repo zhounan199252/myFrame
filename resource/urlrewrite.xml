@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"  
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">  
+  
+<urlrewrite>  
+  
+    <rule>  
+        <from>^/web/SXHRuyQlIZQ=MOs/FK7xSWmYAj80uSlyU/vIX6VoJD2HyXrtlITOwoml7ZRTIhpy9w==.action$</from>  
+        <to>/frontAnnouncement!getSingleAnnouncement.action</to>  
+    </rule>  
+</urlrewrite> 

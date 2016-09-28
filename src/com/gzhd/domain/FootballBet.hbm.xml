@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.gzhd.domain">
+	<class name="FootballBet" table="tb_footballBet">
+
+		<id name="id" column="id" type="string" length="32"><!-- id 表示主键 -->
+			<generator class="uuid"></generator>  <!-- 主键的生成方式 -->
+		</id>
+	<many-to-one name="user" class="FrontUser" unique="true">
+			<column name="userId" length="32">
+				<comment>投注者</comment>
+			</column>
+		</many-to-one>
+
+		<property name="betTime" type="string">
+			<column name="betTime" length="20">
+				<comment>下注时间</comment>
+			</column>
+		</property>
+		<property name="matchTime" type="string">
+			<column name="matchTime" length="20">
+				<comment>比赛时间</comment>
+			</column>
+		</property>
+
+		<property name="homeTeam" type="string">
+			<column name="homeTeam" length="20">
+				<comment>主队</comment>
+			</column>
+		</property>
+
+		<property name="awayTeam" type="string">
+			<column name="awayTeam" length="20">
+				<comment>客队</comment>
+			</column>
+		</property>
+
+		<property name="odds" type="double">
+			<column name="odds" length="20">
+				<comment>赔率</comment>
+			</column>
+		</property>
+
+		<property name="rangQiu" type="string">
+			<column name="rangQiu" length="20">
+				<comment>让球</comment>
+			</column>
+		</property>
+		<property name="winOrLose" type="string">
+			<column name="winOrLose" length="20">
+				<comment>胜负</comment>
+			</column>
+		</property>
+		<property name="multiple" type="int">
+			<column name="multiple" length="10">
+				<comment>倍数</comment>
+			</column>
+		</property>
+
+		<property name="isFulfil" type="string">
+			<column name="isFulfil" length="5">
+				<comment>是否已兑奖</comment>
+			</column>
+		</property>
+		
+		<property name="type" type="string">
+			<column name="type" length="7">
+				<comment>投注类型（单关或多串一）</comment>
+			</column>
+		</property>
+		<property name="seriesNum" type="string">
+			<column name="seriesNum" length="20">
+				<comment>多串一的串号</comment>
+			</column>
+		</property>
+		<property name="matchType" type="string">
+			<column name="matchType" length="10">
+				<comment>竞彩类型（足球或篮球）</comment>
+			</column>
+		</property>
+		<property name="matchId" type="string">
+			<column name="matchId" length="20">
+				<comment>赛事id</comment>
+			</column>
+		</property>
+		<property name="isWinning" type="string">
+			<column name="isWinning" length="10">
+				<comment>是否投中</comment>
+			</column>
+		</property>
+	</class>
+
+
+</hibernate-mapping>
