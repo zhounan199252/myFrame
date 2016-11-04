@@ -12,7 +12,7 @@
 	<context:property-placeholder location="classpath:config.properties" />
 
 	<!-- 2.自动扫描dao和service的包（自动注入） -->
-	<context:component-scan base-package="com.gzhd.dao, com.gzhd.service"></context:component-scan>
+	<context:component-scan base-package="dao,service"></context:component-scan>
 
 	<!-- 3.配置spring数据源 -->
 	<!-- 配置数据源 -->
@@ -23,11 +23,11 @@
 		<property name="password" value="${jdbc.password}" />
 
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="10" />
+		<property name="initialSize" value="5" />
 		<!-- 连接池最大使用连接数量 -->
-		<property name="maxActive" value="50" />
+		<property name="maxActive" value="20" />
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="2" />
+		<property name="minIdle" value="5" />
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="60000" />
 
@@ -71,11 +71,10 @@
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
 			</props>
 		</property>
-
-		<!-- 自动扫描hbm方式配置的hibernate文件和.hbm文件 -->
-		<property name="mappingLocations">
+		
+				<property name="mappingLocations">
 			<list>
-				<value>classpath:/com/gzhd/domain/*.hbm.xml</value>
+				<value>classpath:/domain/*.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -110,7 +109,7 @@
 	</tx:advice>
 	<aop:config>  <!-- 切面 -->
 		<!-- 第一个*代表所有的返回值类型；第二个*代表所有的类；第三个*代表类所有方法；第一个..代表子或者孙子包；最后一个..代表所有的参数 -->
-		<aop:pointcut id="transactionPointcut" expression="execution(* com.gzhd.service..*Impl.*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* service..*.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
 

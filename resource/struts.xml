@@ -22,8 +22,8 @@
 	<!-- 每次HTTP请求系统都重新加载资源文件，有助于开发 -->
 	<constant name="struts.i18n.reload" value="true" />
 
-	<!-- 文件上传最大值：单位为B 1024*1024*1024*10=10737418240B = 10G -->
-	<constant name="struts.multipart.maxSize" value="10737418240" />
+	<!-- 文件上传最大值 -->
+	<constant name="struts.multipart.maxSize" value="104857600" />
 
 	<!-- 让struts2支持动态方法调用 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
@@ -37,77 +37,23 @@
 	<!-- struts2自定义标签主题 -->
 	<constant name="struts.ui.theme" value="simple" />
 
-	<package name="defaultPackage" extends="struts-default"
-		namespace="/">
-		<interceptors>
-			<interceptor name="encodingInterceptor"
-				class="com.gzhd.web.interceptor.EncodingInterceptor" />
-			<interceptor name="frontSessionInterceptor"
-				class="com.gzhd.web.interceptor.FrontSessionInterceptor" />
-			<interceptor name="backSessionInterceptor"
-				class="com.gzhd.web.interceptor.BackSessionInterceptor" />
-			<interceptor name="authInterceptor"
-				class="com.gzhd.web.interceptor.AuthInterceptor" />
-
-			<interceptor-stack name="encodingStack">
-				<interceptor-ref name="defaultStack"></interceptor-ref>
-				<interceptor-ref name="encodingInterceptor"></interceptor-ref>
-			</interceptor-stack>
-
-			<interceptor-stack name="frontSessionStack">
-				<interceptor-ref name="encodingStack"></interceptor-ref>
-				<interceptor-ref name="frontSessionInterceptor">
-					<param name="excludeMethods">
-						listAnnouncement,addAnnouncementPage,addAnnouncement,editAnnouncementPage,editAnnouncement,deleteAnnouncement,
-						publishAnnouncement,unPublishAnnouncement,toBackLogin,toBackIndex,toWelcomePage,backLogin,listBackUser,
-						addBackUserPage,addBackUser,editBackUserPage,editBackUser,deleteBackUser,initBackUserPassword,uploadFCKImage,
-						toFrontLogin,toRegister,frontLogin,listFrontUser,addFrontUserPage,addFrontUser,editFrontUserPage,
-						editFrontUser,deleteFrontUser,initFrontUserPassword,checkFrontUsernameIsExist,toRechargePage,recharge,register,
-						validPassword,frontLogout,logout,getCodeForFront,getCodeForBack,toDefault,announcementList,favorList,getSingleAnnouncement,
-						getSingleFavor,listBackBetMessage,toMatchIndex,getSingleFavor,
-						toGd11x5,toSsq,toDlt,toCqssc,toYlsfc,toBjpk10,listBackBetMessage,deleteById,updateBetMessage,bankRecharge,myBetRecord,,toTtxy,toJpzy,toAqzd,toLmhz,listDepositMessage,
-						updateDepositApply,openMessage,ylsfcAddCode,saveYlsfcCode,,lookOpenMessage,
-						listFootballBet,doFulfil,deleteFootballBet,countBonusBySeriesNum,fulfilBySeriesNum,listBasketballBet,doFulfilForBasketball,deleteBasketballBet,fulfilBySeriesNumForBasketball,
-						changeStatusToEnable,changeStatusToDisable
+	<package name="defaultPackage" extends="struts-default" namespace="/">
 
 
-					</param>    <!-- excludeMethods:不需要经过拦截器的方法 -->
-				</interceptor-ref>
-			</interceptor-stack>
-
-			<interceptor-stack name="backSessionStack">
-				<interceptor-ref name="frontSessionStack"></interceptor-ref>
-				<interceptor-ref name="backSessionInterceptor">
-					<param name="excludeMethods">
-						toBackLogin,backLogin,announcementList,favorList,getSingleAnnouncement,checkFrontUsernameIsExist,getSingleFavor,toFrontLogin,toRegister,
-						frontLogin,register,myCount,toChangePassword,validPassword,changePassword,frontLogout,logout,getCodeForBack,getCodeForFront,toDefault,updateFrontUserInfo,
-						addFootballBet,toMatchIndex,toBetRecord,listMyFootballBetRecord,listMyBasketballBetRecord,
-						toGd11x5,toSsq,toDlt,toCqssc,,toYlsfc,toBjpk10,addBetMessage,addBetMessage,toBankRecharge,bankRecharge,myBetRecord,toTtxy,toJpzy,toAqzd,toLmhz,
-						toDepositApply,addDepositApply,listFrontUserbyRec,lookOpenMessage
-
-					</param>    <!-- excludeMethods:不需要经过拦截器的方法 -->
-				</interceptor-ref>
-			</interceptor-stack>
-
-			<interceptor-stack name="authStack">
-				<interceptor-ref name="backSessionStack"></interceptor-ref>
-				<interceptor-ref name="authInterceptor"></interceptor-ref>
-			</interceptor-stack>
-
-		</interceptors>
-
-		<default-interceptor-ref name="authStack"></default-interceptor-ref>
+		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
 
 		<global-results>
 			<result name="noAuth">/errorPage/noSecurity.jsp</result>
-			<result name="frontNoSession">/errorPage/frontNoSession.jsp</result>
-			<result name="backNoSession">/errorPage/backNoSession.jsp</result>
+			<result name="noSession">/errorPage/noSession.jsp</result>
 			<result name="strutsException">/errorPage/strutsException.jsp</result>
 		</global-results>
 
 		<global-exception-mappings>
-			<exception-mapping result="strutsException"
-				exception="java.lang.Exception"></exception-mapping>
+			<exception-mapping result="strutsException" exception="java.lang.Exception"></exception-mapping>
 		</global-exception-mappings>
+	
+		
 	</package>
+	
+ <!-- 	<include file="com/test/common/image/image-struts.xml"></include> -->
 </struts>
