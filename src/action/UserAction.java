@@ -1,5 +1,6 @@
 package action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -47,8 +48,10 @@ public class UserAction extends BaseAction<UserModel> {
 	UserService    userService; 
 
 	
-	public void add() {
-
+	public void add() throws UnsupportedEncodingException {
+		String zhongwen = ServletActionContext.getRequest().getParameter("username");
+		zhongwen = new String(zhongwen.getBytes("iso8859-1"),"GBK");
+		
 		userService.addUser(model);
 
 		System.out.print(11);

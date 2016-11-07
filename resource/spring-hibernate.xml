@@ -12,7 +12,7 @@
 	<context:property-placeholder location="classpath:config.properties" />
 
 	<!-- 2.自动扫描dao和service的包（自动注入） -->
-	<context:component-scan base-package="dao,service"></context:component-scan>
+	<context:component-scan base-package="dao,service,action"></context:component-scan>
 
 	<!-- 3.配置spring数据源 -->
 	<!-- 配置数据源 -->
@@ -72,11 +72,11 @@
 			</props>
 		</property>
 		
-				<property name="mappingLocations">
-			<list>
-				<value>classpath:/domain/*.hbm.xml</value>
-			</list>
-		</property>
+		<property name="packagesToScan">
+           <list>
+               <value>*</value><!-- 注意路径，要往上一层 -->
+           </list>
+       </property>
 	</bean>
 
 	<!-- 5.配置事务管理器 -->

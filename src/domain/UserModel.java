@@ -8,11 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="user")
 public class UserModel {
+	
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
     @Column
 	private String username;
@@ -20,6 +24,8 @@ public class UserModel {
 	private String name;
     @Column
 	private String password;
+	
+
 	public String getId() {
 		return id;
 	}

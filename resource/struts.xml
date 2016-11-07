@@ -38,9 +38,16 @@
 	<constant name="struts.ui.theme" value="simple" />
 
 	<package name="defaultPackage" extends="struts-default" namespace="/">
+	<interceptors>
+			<interceptor name="encodingInterceptor" class="interceptor.EncodingInterceptor" />
+			<interceptor-stack name="encodingStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="encodingInterceptor"></interceptor-ref>
+			</interceptor-stack>
 
+		</interceptors>
 
-		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+		<default-interceptor-ref name="encodingStack"></default-interceptor-ref>
 
 		<global-results>
 			<result name="noAuth">/errorPage/noSecurity.jsp</result>
