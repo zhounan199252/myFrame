@@ -40,17 +40,23 @@
 	<package name="defaultPackage" extends="struts-default" namespace="/">
 	<interceptors>
 			<interceptor name="encodingInterceptor" class="interceptor.EncodingInterceptor" />
+				<interceptor name="sessionInterceptor" class="interceptor.SessionInterceptor" />
 			<interceptor-stack name="encodingStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="encodingInterceptor"></interceptor-ref>
 			</interceptor-stack>
+				<interceptor-stack name="sessionStack">
+				<interceptor-ref name="encodingStack"></interceptor-ref>
+				<interceptor-ref name="sessionInterceptor">
+					<param name="excludeMethods">register,login,unique</param>
+				</interceptor-ref>
+			</interceptor-stack>
 
 		</interceptors>
 
-		<default-interceptor-ref name="encodingStack"></default-interceptor-ref>
+		<default-interceptor-ref name="sessionStack"></default-interceptor-ref>
 
 		<global-results>
-			<result name="noAuth">/errorPage/noSecurity.jsp</result>
 			<result name="noSession">/errorPage/noSession.jsp</result>
 			<result name="strutsException">/errorPage/strutsException.jsp</result>
 		</global-results>
@@ -58,9 +64,6 @@
 		<global-exception-mappings>
 			<exception-mapping result="strutsException" exception="java.lang.Exception"></exception-mapping>
 		</global-exception-mappings>
-	
 		
 	</package>
-	
- <!-- 	<include file="com/test/common/image/image-struts.xml"></include> -->
 </struts>

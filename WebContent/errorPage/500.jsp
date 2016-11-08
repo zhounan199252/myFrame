@@ -5,6 +5,6 @@
 </head>
 <body>
 	<div>内部错误(Error Code 500)</div>
-	<img alt="内部错误啦" src="${pageContext.request.contextPath}/images/404.jpg">
+	<img alt="内部错误啦" src="${pageContext.request.contextPath}/images/500.jpg">
 </body>
 </html>

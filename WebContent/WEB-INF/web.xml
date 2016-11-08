@@ -45,6 +45,10 @@
     <filter-name>struts2</filter-name>
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
+   <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.jpg</url-pattern>
+  </filter-mapping>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -87,6 +91,6 @@
     <location>/errorPage/500.jsp</location>
   </error-page>
   <welcome-file-list>
-    <welcome-file>welcome.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

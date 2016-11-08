@@ -15,7 +15,7 @@
 
 	<!-- 输出到debug.log -->
 	<appender name="DEBUG" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${catalina.home}/logs/lotteryDebug.log" />  <!--输出到tomcat 的日志目录  -->
+		<param name="File" value="${catalina.home}/logs/myFrameDebug.log" />  <!--输出到tomcat 的日志目录  -->
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -29,7 +29,7 @@
 
 	<!-- 输出到info.log -->
 	<appender name="INFO" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${catalina.home}/logs/lotteryInfo.log" />
+		<param name="File" value="${catalina.home}/logs/myFrameInfo.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -43,7 +43,7 @@
 
 	<!-- 输出到warn.log -->
 	<appender name="WARN" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${catalina.home}/logs/lotteryWarn.log" />
+		<param name="File" value="${catalina.home}/logs/myFrameWarn.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -57,7 +57,7 @@
 
 	<!-- 输出到error.log -->
 	<appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${catalina.home}/logs/lotteryError.log" />
+		<param name="File" value="${catalina.home}/logs/myFrameError.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
