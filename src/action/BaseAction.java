@@ -2,10 +2,12 @@ package action;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
+
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -29,6 +31,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	protected T model;
 	
 	//构造函数生成model实例
+	
 	@SuppressWarnings("rawtypes")
 	public BaseAction() {
 		//通过反射得到model类型信息
@@ -38,7 +41,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 		//通过反射生成model实例
 		try {
 			model = (T) clazz.newInstance();
-		} catch (/*InstantiationException | IllegalAccess*/Exception e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 	}

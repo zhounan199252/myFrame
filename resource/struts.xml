@@ -48,7 +48,7 @@
 				<interceptor-stack name="sessionStack">
 				<interceptor-ref name="encodingStack"></interceptor-ref>
 				<interceptor-ref name="sessionInterceptor">
-					<param name="excludeMethods">register,login,unique</param>
+					<param name="excludeMethods">register,login,unique,getCode</param>
 				</interceptor-ref>
 			</interceptor-stack>
 

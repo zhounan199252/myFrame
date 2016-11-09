@@ -1,9 +1,8 @@
 package action;
 
-import java.io.UnsupportedEncodingException;
+
+
 import javax.annotation.Resource;
-import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.context.annotation.Scope;
@@ -23,12 +22,7 @@ import domain.UserModel;
 
 public class UserAction extends BaseAction<UserModel> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	private static final Logger logger = Logger.getLogger(UserAction.class);
 
 	@Resource
 	UserService    userService; 
@@ -45,13 +39,7 @@ public class UserAction extends BaseAction<UserModel> {
 	/**
 	 * @Description:用户注册
 	 */
-	public void register() throws UnsupportedEncodingException {
-		String username = ServletActionContext.getRequest().getParameter("username");
-		username = new String(username.getBytes("iso8859-1"),"utf-8");
-		String name = ServletActionContext.getRequest().getParameter("name");
-		name = new String(name.getBytes("iso8859-1"),"utf-8");
-		model.setName(name);
-		model.setUsername(username);
+	public void register() {
 		String str=userService.addUser(model);	
 		if(str!=null){
 			writeDataToJsp("注册成功");
@@ -65,10 +53,15 @@ public class UserAction extends BaseAction<UserModel> {
 	 * @Description:用户登录
 	 */
 	public void login() {
-
+		
 		JsonObject json = new JsonObject();
+	   String sessionCode = (String) (ActionContext.getContext().getSession().get(ConstantValues.SECURITY_CODE));
+	   System.out.print(sessionCode);
+		if (!model.getSecurityCode().equals(sessionCode)) {
+			json.addProperty("success", false);
+			json.addProperty("message", "验证码错误，请刷新后重新登陆！");
+		} else {
 			UserModel u = userService.findUser(model);
-
 			if (null == u) {
 				json.addProperty("success", false);
 				json.addProperty("message", "用户名或密码错误，请刷新后重新登陆！");
@@ -83,8 +76,8 @@ public class UserAction extends BaseAction<UserModel> {
 				ActionContext.getContext().getSession().put(ConstantValues.CURRENT_USER_LOGIN, u);
 
 			}
-
-
+	
+		}
 		writeDataToJsp(json.toString());
 	}
 	

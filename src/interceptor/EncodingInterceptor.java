@@ -1,9 +1,8 @@
 package interceptor;
 
 
-import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 
+import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 
@@ -20,7 +19,6 @@ public class EncodingInterceptor extends MethodFilterInterceptor {
 	 * 
 	 */
 	private static final long serialVersionUID = 1101734000361756730L;
-	private static final Logger logger = Logger.getLogger(EncodingInterceptor.class);
 
 	@Override
 	protected String doIntercept(ActionInvocation actionInvocation) throws Exception {

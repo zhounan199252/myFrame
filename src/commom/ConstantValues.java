@@ -21,7 +21,7 @@ public class ConstantValues {
 	/**
 	 * 当前验证码 
 	 */
-	public static final String SESSION_CODE = "sessionCode";
+	public static final String SECURITY_CODE = "securityCode";
 	
 	
 	/**

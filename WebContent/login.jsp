@@ -10,12 +10,22 @@
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/messages_zh.min.js"></script>
+<script src="js/jquery.form.min.js"></script>
 <script src="bootstrap-3.3.7/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <script>
 
 
 $(function() {
+	
+	$('#form_login').keydown(function(event) { // 回车事件（登陆）
+		if (event && event.which == 13) {
+			$('#but_register').click();
+			return false;
+		}
+		return true;	
+		
+	});
 	$('#form_register').keydown(function(event) { // 回车事件（登陆）
 		if (event && event.which == 13) {
 			$('#but_register').click();
@@ -29,8 +39,13 @@ $(function() {
 	// jqueryValidate 表单验证开始
 	$("#form_register").validate({
 		submitHandler:function(form){
-			$(form).ajaxSubmit(); 
-            
+		$(form).ajaxSubmit({
+				type : "post",
+                success:function(data){	
+                $("#but_register>div").remove(".alert");
+				$("#but_register").after("<div class='alert alert-success'>"+data+"</div>");
+				$("#form_register").clearForm();}
+       });  
         } ,   
 		errorPlacement : function(error, element) {
 			error.appendTo(element.parent("div")); // 指定显示错误信息的位置
@@ -77,8 +92,15 @@ $(function() {
 });
 
 
+// 点击获取新的验证码
+function changeValidateCode(obj) {
+	// 获取当前的时间作为参数,没实际意义，只为确保页面不会缓存
+	var timenow = new Date().getTime();
+	$(obj).attr("src", "${pageContext.request.contextPath}/securityCode!getCode.action?d=" + timenow);
+}
+
 /**
- * 提交表单
+ * 提交登录表单
  */
 function login() {
 	$.ajax({
@@ -88,12 +110,12 @@ function login() {
 		success : function(res) {
 			var data = $.parseJSON(res);
 			if (data.success) {
-				$("#form_login>div").remove(".alert");
-				$("#form_login").append("<div class='alert alert-success'>"+data.message+"</div>");
+				$("#but_login>div").remove(".alert");
+				$("#but_login").after("<div class='alert alert-success'>"+data.message+"</div>");
       			location.href = "${pageContext.request.contextPath}/" + data.object;
 			} else {	
-				$("#form_login>div").remove(".alert");
-				$("#form_login").append("<div class='alert alert-warning'>"+data.message+"</div>");
+				$("#but_login>div").remove(".alert");
+				$("#but_login").after("<div class='alert alert-warning'>"+data.message+"</div>");
 			}
 		}
 	});
@@ -128,11 +150,20 @@ function login() {
 								placeholder="请输入密码">
 						</div>
 					</div>
+				<div class="form-group">
+						<label for="password" class="col-sm-2 control-label">验证码</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"   name="securityCode"
+								placeholder="请输入验证码">
+						<img src="${pageContext.request.contextPath }/securityCode!getCode.action" 
+						style="width: 80px; height: 30px" onclick="changeValidateCode(this)" title="点击图片刷新验证码" />
+						</div>
+					</div>	
 				
 				</form>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button  class="btn btn-default"   onclick="login();">登录</button>
+							<button  class="btn btn-default"   onclick="login(); "  id="but_login">登录</button>
 						</div>
 					</div>
 				
