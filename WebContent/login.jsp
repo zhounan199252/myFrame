@@ -1,23 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>登录界面</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="bootstrap-3.3.7/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/messages_zh.min.js"></script>
-<script src="js/jquery.form.min.js"></script>
-<script src="bootstrap-3.3.7/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
+<jsp:include page="js/base.jsp"></jsp:include>
 <script>
 
 
 $(function() {
-	
+	$('#myTab li:eq(0) a').tab('show');
 	$('#form_login').keydown(function(event) { // 回车事件（登陆）
 		if (event && event.which == 13) {
 			$('#but_register').click();
@@ -208,9 +201,5 @@ function login() {
 
 
 </body>
-<script>
-	$(function() {
-		$('#myTab li:eq(0) a').tab('show');
-	});
-</script>
+
 </html>
