@@ -27,12 +27,11 @@ $(function() {
 
 </script>
 <style>
-html,body,div{height:100%;font-size:10px}
+html,body,div{height:100%;}
 </style>
 <body>
 
-<div style="width:15%;background-color:#D2E9FF;font-size:20px">
-<div id="tree"   ></div>
+<div id="tree"  style="width:15%;background-color:#D2E9FF; ">
 
 </div>
 

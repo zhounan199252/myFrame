@@ -13,21 +13,13 @@ $(function() {
 	$('#myTab li:eq(0) a').tab('show');
 	$('#form_login').keydown(function(event) { // 回车事件（登陆）
 		if (event && event.which == 13) {
-			$('#but_register').click();
+			$('#but_login').click();
 			return false;
 		}
 		return true;	
 		
 	});
-	$('#form_register').keydown(function(event) { // 回车事件（登陆）
-		if (event && event.which == 13) {
-			$('#but_register').click();
-			return false;
-		}
-		return true;	
-		
-	});
-	
+
 	
 	// jqueryValidate 表单验证开始
 	$("#form_register").validate({
