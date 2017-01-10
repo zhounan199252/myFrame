@@ -57,7 +57,6 @@ public class BaseDao<T> {
 	}
 
 	public T get(Class<T> c, Serializable id) {
-
 		return (T) getMyCurrentSession().get(c, id);
 	}
 

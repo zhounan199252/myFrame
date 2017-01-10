@@ -95,11 +95,11 @@ function login() {
 		success : function(res) {
 			var data = $.parseJSON(res);
 			if (data.success) {
-				$("#but_login>div").remove(".alert");
+				$("#but_login~div").remove(".alert");
 				$("#but_login").after("<div class='alert alert-success'>"+data.message+"</div>");
       			location.href = "${pageContext.request.contextPath}/" + data.object;
 			} else {	
-				$("#but_login>div").remove(".alert");
+				$("#but_login~div").remove(".alert");
 				$("#but_login").after("<div class='alert alert-warning'>"+data.message+"</div>");
 			}
 		}

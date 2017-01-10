@@ -56,7 +56,6 @@ public class UserAction extends BaseAction<UserModel> {
 		
 		JsonObject json = new JsonObject();
 	   String sessionCode = (String) (ActionContext.getContext().getSession().get(ConstantValues.SECURITY_CODE));
-	   System.out.print(sessionCode);
 		if (!model.getSecurityCode().equals(sessionCode)) {
 			json.addProperty("success", false);
 			json.addProperty("message", "验证码错误，请刷新后重新登陆！");
@@ -96,6 +95,13 @@ public class UserAction extends BaseAction<UserModel> {
 		
 		writeDataToJsp(result);
 	}
+	
+	
+	public void get() {
+        model.setId("402880af5846fa2a015846fafb620000");
+		UserModel u = userService.get(model);
+	writeDataToJsp(u.getName());
+}
 	
 	
 }

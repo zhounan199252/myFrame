@@ -53,5 +53,13 @@ public class UserService {
 		return null;
 	}
 	
+	
+	public UserModel get(UserModel model) {
+		UserModel user = baseDao.get(UserModel.class, model.getId());
+		if (user!=null) {
+			return user;
+		}
+		return null;
+     }
 
 }
