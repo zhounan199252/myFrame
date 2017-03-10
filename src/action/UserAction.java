@@ -2,13 +2,20 @@ package action;
 
 
 
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.context.annotation.Scope;
+
 import service.UserService;
+
 import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionContext;
+
 import commom.ConstantValues;
 import domain.UserModel;
 
@@ -32,6 +39,7 @@ public class UserAction extends BaseAction<UserModel> {
 	 * @Description:进入主页
 	 */
 	public String toIndex() {
+		
 		return  "toIndex";
 	}
 	
@@ -48,7 +56,36 @@ public class UserAction extends BaseAction<UserModel> {
 		}
 	
 	}
+	
+	
+	/**
+	 * @throws UnsupportedEncodingException 
+	 * @Description:手机用户注册
+	 */
+	public void AndroidRegister() throws UnsupportedEncodingException {
+/*	   Map<String, Object>  map =	ActionContext.getContext().getParameters();
+		UserModel  model1 = new UserModel();
+		String[] username=(String[])map.get("username");
+		String[] name=(String[])map.get("password");
+		String[] password=(String[])map.get("password");
+		model1.setUsername(username[0]);
+		model1.setName("name");
+		model1.setPassword(password[0]);*/	
+		UserModel u = userService.unique(model);
+		if (null == u) {
+			String str=userService.addUser(model);	
+			if(str!=null){
+				writeDataToJsp("注册成功");
+			}else{
+				writeDataToJsp("注册失败");
+			}	
+		}else{
+			writeDataToJsp("此用户名已被占用");
+		}
+	}
 
+	
+	
 	/**
 	 * @Description:用户登录
 	 */
@@ -78,6 +115,31 @@ public class UserAction extends BaseAction<UserModel> {
 	
 		}
 		writeDataToJsp(json.toString());
+	}	
+	
+	
+	
+	/**
+	 * @Description:手机用户登录
+	 */
+	public void AndroidLogin() {
+		
+		JsonObject json = new JsonObject();
+	
+			UserModel u = userService.findUser(model);
+			if (null == u) {
+				json.addProperty("success", false);
+				json.addProperty("message", "用户名或密码错误，请刷新后重新登陆！");
+			} else {
+				json.addProperty("success", true);
+				json.addProperty("message", "用户登录成功");
+				// 若用户已经登陆，则移除登陆信息
+				if (null != ActionContext.getContext().getSession().get(ConstantValues.CURRENT_USER_LOGIN)) {
+					ActionContext.getContext().getSession().remove(ConstantValues.CURRENT_USER_LOGIN);
+				}
+				ActionContext.getContext().getSession().put(ConstantValues.CURRENT_USER_LOGIN, u);
+		}
+		writeDataToJsp(json.toString());
 	}
 	
 	
@@ -96,12 +158,6 @@ public class UserAction extends BaseAction<UserModel> {
 		writeDataToJsp(result);
 	}
 	
-	
-	public void get() {
-        model.setId("402880af5846fa2a015846fafb620000");
-		UserModel u = userService.get(model);
-	writeDataToJsp(u.getName());
-}
 	
 	
 }

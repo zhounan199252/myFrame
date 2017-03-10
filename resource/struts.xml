@@ -48,7 +48,7 @@
 				<interceptor-stack name="sessionStack">
 				<interceptor-ref name="encodingStack"></interceptor-ref>
 				<interceptor-ref name="sessionInterceptor">
-					<param name="excludeMethods">register,login,unique,getCode,get</param>
+					<param name="excludeMethods">register,login,unique,getCode,get,AndroidRegister,AndroidLogin</param>
 				</interceptor-ref>
 			</interceptor-stack>
 
